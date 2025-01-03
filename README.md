@@ -5,11 +5,22 @@ Cliente de consola escrito en Python para Telegraph [Telegraph](https://telegra.
 **v1.0.4**
 ## Usar Localmente
 
-Solo necesitas Python3 y acceso a Internet
+### Instalar dependencias
+
+```bash
+pip install request
+```
+
+### Clonar el repositorio y entrar a la carpeta
 
 ```bash
 git clone https://github.com/ericjhernandezj/py-telegraph-cli-client.git
 cd py-telegraph-cli-client/
+```
+
+### Correr el cliente de Telegraph
+
+```bash
 python3 src/main.py
 ```
 
