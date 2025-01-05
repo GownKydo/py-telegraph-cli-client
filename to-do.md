@@ -12,8 +12,6 @@ Los elementos y versiones cambian de acuerdo a como se va moviendo el proyecto.
 
 ## v1.2.0 - New Feature
 
-- [ ] Crear función que tome cómo parámetros `color: str, message: str`
-      y regrese o imprima el mensaje en ese color
 - [ ] `createAccount()` - Hacer `author_url` y `author_name`opcionales y agregar
 						  validaciones
 - [ ] `login()` - Agregar opciones para:

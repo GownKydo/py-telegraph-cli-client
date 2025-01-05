@@ -118,7 +118,7 @@ def main():
 
         if account.ok:
             clear()
-            print(f"\n\n{StrStyle.SUCCESS}\tCuenta creada con éxito{StrStyle.ENDC}")
+            print(f"\n{StrStyle.SUCCESS}\t\tCuenta creada con éxito{StrStyle.ENDC}")
             account.printInfo("all")
         else:
             print(f"{StrStyle.FAIL}Error al crear cuenta{StrStyle.ENDC}")
