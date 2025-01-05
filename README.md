@@ -3,25 +3,32 @@
 Cliente de consola escrito en Python para Telegraph [Telegraph](https://telegra.ph), herramienta de Blogging minimalista desarrollada por Telegram.
 
 **v1.0.4**
-## Usar Localmente
 
-### Instalar dependencias
+## Instalar dependencias
+
+### Windows
 
 ```bash
-pip install request
+pip -m install request
 ```
 
-### Clonar el repositorio y entrar a la carpeta
+### Linux
+
+```bash
+pip3 install request
+```
+
+## Clonar el repositorio y entrar a la carpeta
 
 ```bash
 git clone https://github.com/ericjhernandezj/py-telegraph-cli-client.git
 cd py-telegraph-cli-client/
 ```
 
-### Correr el cliente de Telegraph
+## Correr el cliente de Telegraph
 
 ```bash
-python3 src/main.py
+python3 main.py
 ```
 
 ## Funcionalidades
@@ -54,7 +61,3 @@ Iniciando sesión
 ## Licencia
 
 [MIT](https://choosealicense.com/licenses/mit/)
-
-## Autores
-
-- [@ericjhernandezj](https://github.com/ericjhernandezj)
