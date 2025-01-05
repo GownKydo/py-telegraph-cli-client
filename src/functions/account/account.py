@@ -1,4 +1,5 @@
 import requests
+from styles.styles import StrStyle
 
 class Account:
     """
@@ -44,9 +45,9 @@ class Account:
             target (str): Define qué información mostrar:
                 - 'default': Muestra la información pública/segura del usuario.
                 - 'all': Muestra toda la información del usuario, incluyendo
-                         información sensible.
+                        información sensible.
                 - 'ok', 'short_name', 'author_name', 'author_url',
-                  'page_count', 'auth_url', 'access_token': Muestra información
+                'page_count', 'auth_url', 'access_token': Muestra información
                                                             específica.
 
         Si 'target' no coincide con ninguna opción, imprime un mensaje de
@@ -57,35 +58,45 @@ class Account:
             "Nombre corto: Eric Hernandez"
         """
         if target == "default":
-            print("--- Información Pública del Usuario ---")
-            print(f"Nombre: {self.short_name}")
-            print(f"Autor: {self.author_name}")
-            print(f"URL: {self.author_url}")
-            print(f"Páginas: {self.page_count}")
+            print(f"\n{StrStyle.IMPORTANT}--- Información Pública del Usuario ---{StrStyle.ENDC}\n")
+            print(f"{StrStyle.REGULAR}Nombre: {self.short_name}{StrStyle.ENDC}")
+            print(f"{StrStyle.REGULAR}Autor: {self.author_name}{StrStyle.ENDC}")
+            print(f"{StrStyle.REGULAR}URL: {self.author_url}{StrStyle.ENDC}")
+            print(f"{StrStyle.REGULAR}Páginas: {self.page_count}{StrStyle.ENDC}\n")
+
         elif target == "all":
-            print("--- Información (pública y privada) del Usuario ---")
-            print(f"Nombre: {self.short_name}")
-            print(f"Autor: {self.author_name}")
-            print(f"URL: {self.author_url}")
-            print(f"Páginas: {self.page_count}")
-            print(f"URL de login para navegador web: {self.auth_url}")
-            print(f"Token de acceso: {self.access_token}")
+            print(f"\n{StrStyle.IMPORTANT}--- Información (pública y privada) del Usuario ---{StrStyle.ENDC}\n")
+            print(f"{StrStyle.REGULAR}Nombre: {self.short_name}{StrStyle.ENDC}")
+            print(f"{StrStyle.REGULAR}Autor: {self.author_name}{StrStyle.ENDC}")
+            print(f"{StrStyle.REGULAR}URL: {self.author_url}{StrStyle.ENDC}")
+            print(f"{StrStyle.REGULAR}Páginas: {self.page_count}{StrStyle.ENDC}")
+            print(f"{StrStyle.REGULAR}URL de login para navegador web: {self.auth_url}{StrStyle.ENDC}")
+            print(f"{StrStyle.REGULAR}Token de acceso: {self.access_token}{StrStyle.ENDC}\n")
+
         elif target == "ok":
-            print(f"OK: {self.ok}")
+            print(f"\n{StrStyle.SUCCESS}OK: {self.ok}{StrStyle.ENDC}\n")
+
         elif target == "short_name":
-            print(f"Nombre corto: {self.short_name}")
+            print(f"\n{StrStyle.INFO}Nombre corto: {self.short_name}{StrStyle.ENDC}\n")
+
         elif target == "author_name":
-            print(f"Autor: {self.author_name}")
+            print(f"\n{StrStyle.INFO}Autor: {self.author_name}{StrStyle.ENDC}\n")
+
         elif target == "author_url":
-            print(f"URL de autor: {self.author_url}")
+            print(f"\n{StrStyle.INFO}URL de autor: {self.author_url}{StrStyle.ENDC}\n")
+
         elif target == "page_count":
-            print(f"Páginas: {self.page_count}")
+            print(f"\n{StrStyle.INFO}Páginas: {self.page_count}{StrStyle.ENDC}\n")
+
         elif target == "auth_url":
-            print(f"Iniciar sesión en navegado web: {self.auth_url}")
+            print(f"\n{StrStyle.INFO}Iniciar sesión en navegador web: {self.auth_url}{StrStyle.ENDC}\n")
+
         elif target == "access_token":
-            print(f"Token de acceso: {self.access_token}")
+            print(f"\n{StrStyle.INFO}Token de acceso: {self.access_token}{StrStyle.ENDC}\n")
+
         else:
-            print("Error con pase de argumentos")
+            print(f"\n{StrStyle.FAIL}Error con pase de argumentos{StrStyle.ENDC}\n")
+
 
 
 def getAccountInfo(access_token):

@@ -1,4 +1,5 @@
 import requests
+from styles.styles import StrStyle
 
 def editAccountInfo(access_token: str, target: str, new_value: str):
     """
@@ -21,6 +22,6 @@ def editAccountInfo(access_token: str, target: str, new_value: str):
     data = response.json()
 
     if data["ok"]:
-        print("Cambio hecho con éxito")
+        print(f"\n{StrStyle.SUCCESS}Cambio hecho con éxito{StrStyle.ENDC}")
     else:
-        print("Error. ok not True")
+        print(f"\n{StrStyle.FAIL}Error. ok not True{StrStyle.ENDC}")

@@ -39,21 +39,6 @@ Funciones destacables:
                    nombre de autor y URL de autor.
 - revokeAccessToken: Cierra sesiones en navegadores web y genera un nuevo
                      token de acceso.
-
-Uso
----
-~$ git clone https://github.com/ericjhernandezj/py-telegraph-cli-client.git
-~$ cd py-telegraph-cli-client/
-~$ python3 src/main.py
-
-Si este programa será ejecutado en Windows, ir a la función clear() y cambiar
-system("clear") por system("cls").
-
-Autor
------
-Eric Joel Hernandez Javier (@ericjhernandezj)
-https://ericjhernandezj.com
-ericjhernandezj@duck.com
 """
 
 import re  # Para pseudo-verificar URLs
@@ -63,55 +48,54 @@ from functions.account.authentication.login_account import login  # Función par
 from functions.utils.clear_screen import clear  # Función para limpiar la consola
 
 def main():
-    """Función principal del programa."""
     clear()
 
-    print("Cliente de Consola escrito en Python para Telegra.ph")
-    print()
-    print("1. Crear cuenta")
-    print("2. Acceder a cuenta")
-    user_input = input("\n> ")
+    print(f"{StrStyle.IMPORTANT}Cliente de Consola escrito en Python para Telegra.ph{StrStyle.ENDC}\n")
+    print(f"{StrStyle.INFO}1. Crear cuenta{StrStyle.ENDC}")
+    print(f"{StrStyle.INFO}2. Acceder a cuenta{StrStyle.ENDC}")
+    user_input = input(f"\n{StrStyle.REGULAR}> {StrStyle.ENDC}")
 
     if user_input == "1":
         clear()
 
-        print("(Obligatorio)\n"
-              "Ingresar nombre corto para La Cuenta\n"
-              "Este nombre será usado para ayudar a identificar cuentas "
-              "en caso de tener muchas")
+        print(f"{StrStyle.IMPORTANT}(Obligatorio){StrStyle.ENDC}\n\n"
+              f"{StrStyle.REGULAR}[*] Ingresar nombre corto para La Cuenta{StrStyle.ENDC}\n"
+              f"{StrStyle.REGULAR}\t- Este nombre será usado para ayudar a identificar cuentas "
+              f"en caso de tener muchas{StrStyle.ENDC}\n")
 
         while True:
-            short_name = input("> ")
+            short_name = input(f"{StrStyle.REGULAR}> {StrStyle.ENDC}")
 
             if len(short_name) < 1:
-                print('Nombre corto muy corto. Intente de nuevo.')
+                print(f"{StrStyle.WARNING}Nombre corto muy corto. Intente de nuevo.{StrStyle.ENDC}")
             elif len(short_name) > 32:
-                print('Nombre corto muy largo. Intente de nuevo.')
+                print(f"{StrStyle.WARNING}Nombre corto muy largo. Intente de nuevo.{StrStyle.ENDC}")
             else:
                 break
 
-
-        print("(Obligatorio)\n"
-          "Ingresar nombre del autor de los articulos\n"
-          "Este nombre aparecerá como autor en futuros articulos")
+        clear()
+        print(f"{StrStyle.IMPORTANT}\n\n(Obligatorio){StrStyle.ENDC}\n\n"
+              f"{StrStyle.REGULAR}[*] Ingresar nombre del autor de los articulos{StrStyle.ENDC}\n"
+              f"{StrStyle.REGULAR}\tEste nombre aparecerá como autor en futuros articulos{StrStyle.ENDC}\n")
 
         while True:
-            author_name = input("> ")
+            author_name = input(f"{StrStyle.REGULAR}> {StrStyle.ENDC}")
 
-            if len(author_name) < 0:
-                print('Nombre de autor muy corto. Intente de nuevo.')
+            if len(author_name) < 1:
+                print(f"{StrStyle.WARNING}Nombre de autor muy corto. Intente de nuevo.{StrStyle.ENDC}")
             elif len(author_name) > 128:
-                print('Nombre de autor muy largo. Intente de nuevo.')
+                print(f"{StrStyle.WARNING}Nombre de autor muy largo. Intente de nuevo.{StrStyle.ENDC}")
             else:
                 break
 
-        print("(Obligatorio)\n"
-              "Ingresar URL de autor\n"
-              "Cuando el lector presione el nombre del autor, "
-              "será enviado a esta URL")
+        clear()
+        print(f"{StrStyle.IMPORTANT}\n\n(Obligatorio){StrStyle.ENDC}\n\n"
+              f"{StrStyle.REGULAR}Ingresar URL de autor{StrStyle.ENDC}\n"
+              f"{StrStyle.REGULAR}Cuando el lector presione el nombre del autor, "
+              f"será enviado a esta URL{StrStyle.ENDC}")
 
         while True:
-            author_url = input("> https://")
+            author_url = input(f"\n{StrStyle.REGULAR}> https://{StrStyle.ENDC}")
 
             if not author_url:
                 break
@@ -124,34 +108,33 @@ def main():
             if url_pattern.match(author_url):
                 author_url = f'https://{author_url}'
                 if len(author_url) > 512:
-                    print('URL válida pero muy larga.')
+                    print(f"{StrStyle.WARNING}URL válida pero muy larga.{StrStyle.ENDC}")
                 else:
                     break
             else:
-                print('Formato de URL invalido')
-
+                print(f"{StrStyle.FAIL}Formato de URL invalido{StrStyle.ENDC}")
 
         account = createAccount(short_name, author_name, author_url)
 
-
         if account.ok:
-            print("Cuenta creada con éxito")
+            clear()
+            print(f"\n\n{StrStyle.SUCCESS}\tCuenta creada con éxito{StrStyle.ENDC}")
             account.printInfo("all")
         else:
-            print("Error al crear cuenta")
+            print(f"{StrStyle.FAIL}Error al crear cuenta{StrStyle.ENDC}")
             print(account.printInfo("ok"))
+
     elif user_input == "2":
         clear()
 
-        print("Ingresar token de acceso")
-        token = input("> ")
+        print(f"{StrStyle.INFO}Ingresar token de acceso{StrStyle.ENDC}")
+        token = input(f"{StrStyle.REGULAR}> {StrStyle.ENDC}")
 
         clear()
-
         login(token)
-    else:
-        print("Error")
 
+    else:
+        print(f"{StrStyle.FAIL}Error{StrStyle.ENDC}")
 
 if __name__ == "__main__":
     main()

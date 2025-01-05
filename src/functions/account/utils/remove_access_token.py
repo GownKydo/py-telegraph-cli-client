@@ -1,4 +1,5 @@
 import requests
+from styles.styles import StrStyle
 
 def revokeAccessToken(access_token: str):
     """
@@ -21,9 +22,8 @@ def revokeAccessToken(access_token: str):
     data = response.json()
 
     if data["ok"]:
-        print(
-            "Sesiones cerradas. Nuevo token generado. Nuevo auth_url generado")
-        print(f"Nuevo token de acceso: {data['result']['access_token']}")
-        print(f"Nuevo auth_url: {data['result']['auth_url']}")
+        print(f"\n{StrStyle.SUCCESS}Sesiones cerradas. Nuevo token generado. Nuevo auth_url generado{StrStyle.ENDC}")
+        print(f"{StrStyle.INFO}Nuevo token de acceso: {data['result']['access_token']}{StrStyle.ENDC}")
+        print(f"{StrStyle.INFO}Nuevo auth_url: {data['result']['auth_url']}{StrStyle.ENDC}\n")
     else:
-        print("Error. ok not True")
+        print(f"\n{StrStyle.FAIL}Error. ok not True{StrStyle.ENDC}\n")

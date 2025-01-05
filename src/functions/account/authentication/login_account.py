@@ -2,6 +2,7 @@ from functions.account.account import getAccountInfo
 from functions.account.management.edit_account import editAccountInfo
 from functions.account.utils.remove_access_token import revokeAccessToken
 from functions.utils.clear_screen import clear
+from styles.styles import StrStyle
 
 def login(access_token: str):
     """
@@ -21,101 +22,98 @@ def login(access_token: str):
         account = getAccountInfo(access_token)
 
         if account.ok:
-            print("\nEsta es una sesión temporal")
-            print(f"Hola, {account.short_name} ({account.author_name})")
+            print(f"\n{StrStyle.SUCCESS}Esta es una sesión temporal{StrStyle.ENDC}")
+            print(f"{StrStyle.SUCCESS}Hola, {account.short_name} ({account.author_name}){StrStyle.ENDC}")
             print()
-            print("1. Mostrar información")
-            print("2. Editar Información")
-            print("3. Crear nuevo token de acceso")
-            print("0. Salir")
+            print(f"{StrStyle.INFO}1. Mostrar información{StrStyle.ENDC}")
+            print(f"{StrStyle.INFO}2. Editar Información{StrStyle.ENDC}")
+            print(f"{StrStyle.INFO}3. Crear nuevo token de acceso{StrStyle.ENDC}")
+            print(f"{StrStyle.INFO}0. Salir{StrStyle.ENDC}")
             user_input = input("> ")
 
             if user_input == "1":
-                print("1. Mostrar Información Pública")
-                print("2. Mostrar Información Pública y Privada")
-                print("0. Regresar")
+                print(f"{StrStyle.INFO}1. Mostrar Información Pública{StrStyle.ENDC}")
+                print(f"{StrStyle.INFO}2. Mostrar Información Pública y Privada{StrStyle.ENDC}")
+                print(f"{StrStyle.INFO}0. Regresar{StrStyle.ENDC}")
                 user_input = input("> ")
 
                 if user_input == "1":
                     clear()
                     account.printInfo("default")
+
                 elif user_input == "2":
                     clear()
                     account.printInfo("all")
+
                 elif user_input == "0":
                     clear()
                 else:
                     clear()
-                    print("Entrada no válida. Regresando al menú principal")
+                    print(f"{StrStyle.FAIL}Entrada no válida. Regresando al menú principal{StrStyle.ENDC}")
+            
             elif user_input == "2":
-                print("1. Cambiar nombre corto")
-                print("2. Cambiar autor")
-                print("3. Cambiar URL de autor")
-                print("0. Regresar")
+                print(f"{StrStyle.INFO}1. Cambiar nombre corto{StrStyle.ENDC}")
+                print(f"{StrStyle.INFO}2. Cambiar autor{StrStyle.ENDC}")
+                print(f"{StrStyle.INFO}3. Cambiar URL de autor{StrStyle.ENDC}")
+                print(f"{StrStyle.INFO}0. Regresar{StrStyle.ENDC}")
                 user_input = input("> ")
 
                 if user_input == "1":
                     clear()
-                    print("Ingresar nuevo nombre corto")
+                    print(f"{StrStyle.INFO}Ingresar nuevo nombre corto{StrStyle.ENDC}")
                     new_short_name = input("> ")
-
                     editAccountInfo(access_token, "short_name", new_short_name)
+            
                 elif user_input == "2":
                     clear()
-                    print("Ingresar nuevo autor")
+                    print(f"{StrStyle.INFO}Ingresar nuevo autor{StrStyle.ENDC}")
                     new_author_name = input("> ")
-
-                    editAccountInfo(access_token, "author_name",
-                                    new_author_name)
+                    editAccountInfo(access_token, "author_name", new_author_name)
+            
                 elif user_input == "3":
                     clear()
-                    print("Ingresar nueva URL")
+                    print(f"{StrStyle.INFO}Ingresar nueva URL{StrStyle.ENDC}")
                     new_author_url = input("> https://")
                     new_author_url = f"https://{new_author_url}"
-
                     editAccountInfo(access_token, "author_url", new_author_url)
+            
                 elif user_input == "0":
                     clear()
+            
                 else:
                     clear()
-                    print("Entrada no válida. Regresando al menú principal")
+                    print(f"{StrStyle.FAIL}Entrada no válida. Regresando al menú principal{StrStyle.ENDC}")
+            
             elif user_input == "3":
                 clear()
-                print("Ingresar 'OK' si deseas cerrar todas las sesiones, "
-                      "generar nuevo token de acceso y generar nueva URL "
-                      "para navegadores web\n"
-                      "Después de ingresar 'OK' se te proporcionará un nuevo "
-                      "token y nueva URL para navegadores web. Guardar el "
-                      "nuevo token ya que es la unica forma de acceder "
-                      "a la cuenta\n"
-                      "Una vez generado el nuevo token de acceso, el token "
-                      "anterior quedará inutilizable")
+                print(f"{StrStyle.INFO}Ingresar 'OK' si deseas cerrar todas las sesiones, "
+                    "generar nuevo token de acceso y generar nueva URL para navegadores web\n"
+                    "Después de ingresar 'OK' se te proporcionará un nuevo token y nueva URL para navegadores web. "
+                    "Guardar el nuevo token ya que es la unica forma de acceder a la cuenta\n"
+                    "Una vez generado el nuevo token de acceso, el token anterior quedará inutilizable{StrStyle.ENDC}")
                 user_input = input("> ")
 
                 if user_input == "OK":
                     revokeAccessToken(access_token)
 
                     while True:
-                        print(
-                            "Si ya has guardado tu nuevo token de acceso, "
-                            "ingresa 'EXIT' para cerrar del programa"
-                        )
+                        print(f"{StrStyle.INFO}Si ya has guardado tu nuevo token de acceso, ingresa 'EXIT' para cerrar del programa{StrStyle.ENDC}")
                         user_input = input("> ")
 
                         if user_input == "EXIT":
-                            print("Cerrando programa")
-
+                            print(f"{StrStyle.SUCCESS}Cerrando programa{StrStyle.ENDC}")
                             return False
                 else:
-                    print("Acción cancelada")
+                    print(f"{StrStyle.FAIL}Acción cancelada{StrStyle.ENDC}")
+            
             elif user_input == "0":
-                print("Saliendo...")
-
+                print(f"{StrStyle.SUCCESS}Saliendo...{StrStyle.ENDC}")
                 return False
+            
             else:
-                print("Entrada no válida")
+                print(f"{StrStyle.FAIL}Entrada no válida{StrStyle.ENDC}")
+        
         else:
-            print("La cuenta no existe.")
-            print(f'Token "{account.access_token}" no válido')
-
+            print(f"{StrStyle.FAIL}La cuenta no existe.{StrStyle.ENDC}")
+            print(f'{StrStyle.FAIL}Token "{account.access_token}" no válido{StrStyle.ENDC}\n')
             return False
